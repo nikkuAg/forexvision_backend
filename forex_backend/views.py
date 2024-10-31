@@ -1,5 +1,6 @@
 from forex_backend.models import ExchangeRate
 from forex_backend.serializer import ExchangeRateSerializer
+from forex_backend.crontab import sync_exchange_rate_yearly
 from forex_backend.utils import (convert_period_to_date_range,
                                  validate_date_range, validate_quote)
 from rest_framework import status
@@ -19,7 +20,8 @@ class ForexView(APIView):
             if period:
                 start_date, end_date = convert_period_to_date_range(period)
             else:
-                start_date, end_date = validate_date_range(start_date, end_date)
+                start_date, end_date = validate_date_range(
+                    start_date, end_date)
         except Exception as e:
             return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -30,3 +32,8 @@ class ForexView(APIView):
         data = ExchangeRateSerializer(data, many=True).data
 
         return Response(data, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        sync_exchange_rate_yearly()
+        data = ExchangeRate.objects.all()
+        return Response(ExchangeRateSerializer(data, many=True).data, status=status.HTTP_200_OK)
