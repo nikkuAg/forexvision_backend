@@ -121,7 +121,7 @@ CRONJOBS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://forexvision-backend.onrender.com",
-    "https:/forexvision-frontend.onrender.com",
+    "https://forexvision-frontend.onrender.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
