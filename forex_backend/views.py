@@ -6,9 +6,31 @@ from forex_backend.utils import (convert_period_to_date_range,
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 
 
 class ForexView(APIView):
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['quote'],
+            properties={
+                'quote': openapi.Schema(type=openapi.TYPE_STRING, description='Quote'),
+                'period': openapi.Schema(type=openapi.TYPE_STRING, description='Period'),
+                'start_date': openapi.Schema(type=openapi.TYPE_STRING, description='Start date'),
+                'end_date': openapi.Schema(type=openapi.TYPE_STRING, description='End date'),
+            },
+            example={
+                'quote': 'EURUSD',
+                'period': '1M',
+            }
+        ),
+        responses={
+            200: openapi.Response('Success'),
+            400: openapi.Response('Bad Request'),
+        }
+    )
     def post(self, request, *args, **kwargs):
         period = request.data.get("period", None)
         start_date = request.data.get("start_date", None)

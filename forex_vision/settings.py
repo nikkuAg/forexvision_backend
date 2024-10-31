@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_crontab",
     "corsheaders",
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
