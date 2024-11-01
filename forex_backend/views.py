@@ -55,6 +55,9 @@ class ForexView(APIView):
 
         return Response(data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        auto_schema=None
+    )
     def get(self, request):
         sync_exchange_rate_yearly()
         data = ExchangeRate.objects.all()

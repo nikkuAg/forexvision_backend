@@ -20,7 +20,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = [
-    "forexvision-backend.onrender.com"
+    "forexvision-backend.onrender.com",
+    "localhost"
 ]
 
 
