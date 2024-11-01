@@ -131,3 +131,22 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'forex_vision.urls.schema_view',
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'SHOW_REQUEST_HEADERS': True,
+    'SUPPORTED_SUBMIT_METHODS': [
+        'get',
+        'post',
+        'put',
+        'delete',
+        'patch'
+    ],
+    'DISPLAY_OPERATION_ID': False,
+    'VALIDATOR_URL': None,
+}
